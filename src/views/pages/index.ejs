@@ -1,0 +1,91 @@
+<div class="w-full py-4">
+  <form
+    action="/solve"
+    method="POST"
+    enctype="multipart/form-data"
+    class="space-y-4"
+  >
+    <!-- Grammar Type -->
+    <select name="category" class="select select-bordered w-full">
+      <option value="">Select Grammar Type</option>
+      <option>Articles</option>
+      <option>Prepositions</option>
+      <option>Word & Phrase</option>
+      <option>Completing Sentences</option>
+      <option>Right form of verbs</option>
+      <option>Transformation of sentences</option>
+      <option>Narration</option>
+      <option>Pronoun References</option>
+      <option>Modifiers</option>
+      <option>Connectors</option>
+      <option>Antonym or Synonym</option>
+      <option>Punctuation Marks</option>
+    </select>
+
+    <!-- Mode Toggle -->
+    <div class="flex justify-center gap-4">
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input
+          type="radio"
+          name="mode"
+          value="text"
+          class="radio radio-primary"
+          checked
+        />
+        <span>Write Text</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input
+          type="radio"
+          name="mode"
+          value="image"
+          class="radio radio-primary"
+        />
+        <span>Upload Image</span>
+      </label>
+    </div>
+
+    <!-- Text Input -->
+    <div id="textInput" class="space-y-2">
+      <textarea
+        name="question"
+        class="textarea textarea-bordered w-full h-64"
+        placeholder="Enter your grammar question..."
+      ></textarea>
+    </div>
+
+    <!-- Image Input -->
+    <div id="imageInput" class="hidden space-y-2">
+      <input
+        type="file"
+        name="image"
+        accept="image/*"
+        class="file-input file-input-bordered w-full"
+      />
+      <p class="text-sm text-gray-500 text-center">
+        Upload an image of your question
+      </p>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-full">Solve Now</button>
+  </form>
+</div>
+
+<script>
+  const textRadio = document.querySelector('input[value="text"]');
+  const imageRadio = document.querySelector('input[value="image"]');
+  const textInput = document.getElementById("textInput");
+  const imageInput = document.getElementById("imageInput");
+
+  textRadio.addEventListener("change", () => {
+    textInput.classList.remove("hidden");
+    imageInput.classList.add("hidden");
+    document.querySelector("textarea[name='question']").required = true;
+  });
+
+  imageRadio.addEventListener("change", () => {
+    textInput.classList.add("hidden");
+    imageInput.classList.remove("hidden");
+    document.querySelector("textarea[name='question']").required = false;
+  });
+</script>
